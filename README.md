@@ -26,3 +26,17 @@ Los contenedores en Docker admiten múltiples tipos de configuraciones, incluyen
 
 Es posible crear clusters de contenedores, crear imágenes y muchas más funciones que facilitan el trabajo de un DevOps.
 
+Instalación de Docker
+
+``https://docs.docker.com/engine/install/ubuntu/``
+
+Primero desinstalar versiones antiguas
+
+``sudo apt-get remove docker docker-engine docker.io containerd runc``
+
+Instalar docker usando el repositorio
+
+```docker
+```
+
+
