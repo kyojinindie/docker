@@ -119,3 +119,49 @@ docker rm IDcontenedor | Elimina un contenedor
 docker create | Creamos un contenedor pero no lo arrancamos
 docker image save imagen -o ./nombre-archivo.tar | Guarda una imagen en un archivo .tar
 docker image rm image  | Elimina  una imagen
+docker logs container-name | Muestra los logs de una aplicación
+docker exec -it container-name bash | Nos permite lanzar un comando contra un contenedor concreto en este caso el comando es bash
+docker top container-name | Este comando nos enseña los programas que se estan ejecutando actualmente en el contenedor
+docker stats container-name | Para ver las estadísticas de un contenedor
+docker kill container-name | Mata directamente el contenedor
+docker image inspect image-name | Nos devuelve una estructura en formato JSON
+``docker image inspect image-name | grep "propiedad del JSON"`` | Nos regresa una propiedad especifica del JSON
+docker image inspect image-name > file-name.json | Guardamos en un archivo la información proporcionada por el comando inspect
+docker pull | Descarga una imagen del repositorio sin crear un contenedor
+docker container inspect container-name | Nos devuelve la información del contenedor en formato JSON
+docker inspect --formar='{{.LogPath}}' container-namer | Comando alternativo a grep
+
+## Networking en Docker
+
+
+Comando | Descripción
+------------ | -------------
+docker run -d --name container-name -p puerto-anfitrion:puerto-contenedor image| Mapea el puerto de la máquina anfitriona a un puerto dentro del contenedor
+docker run -d --name container-name -p localhost:puerto-anfitrion:puerto-contenedor image | Mismo comando que el anterior pero asigna manualmente una interface de red concreta
+docker run -d --name container-name -P image | Docker genera automaticamente un puerto para mapera con la máquina anfitriona
+docker network | Gestiona las redes de docker
+docker network ls | Lista las redes que estan actualmente creadas en el servicio de docker
+docker network connect | Para conectarnos a una red concreta partiendo de un contenedor determinado
+docker network create nombre-red | Crea una red
+docker network inspect network-name| Obtenemos información de una o mas redes
+docker network prune | Eliminara todas las redes inactivas
+docker run -d -p puerto-anfitrion:puerto-contenedor --network network-name --name nombre-contenedor image | Crea un contenedor y lo asigna a una red existente
+docker network create network-name --subnet=ip-address/16 --ip-range=ip-address/24 | Crea una red con una subnet y un rango
+docker network connect network-name container-name | Vincula el contenedor a la red
+docker network disconnect network-name container-name | Desconecta el contenedor de la red
+docker network rm network-name | Elimina una red
+
+## Docker volumenes
+
+Comando | Descripción
+------------ | -------------
+sudo ls -l /var/lib/docker| Muestra los archivo donde se guarda información de configuración de docker
+sudo ls -l /var/lib/docker/Hash-volume/_data | Contiene la información almacenada en el volumen
+docker run -it --name container-name -v /volume-name image command | Crea un volumen dentro del contenedor
+docker run -it --name container-name -v /directorio-anfitrion:/directorio-contenedor image command | Crea un contenedor con un volumen vinculado a un directorio del anfitrion
+docker run -it --name container-name --volumes-from container-name image command | Crea un contenedor y vincula un volumen de otro contenedor
+docker volume create volume-name| Crea un volumen
+docker volume prune | Elimina todos los volumenes que no estan siendo usados por un contenedor activo
+docker volume rm volume-name| Elimina un volumen
+docker run -it --name container-name -v volumen-creado:/ruta-contenedor image
+docker volume inspect volume-name | Muestra la información del volumen
