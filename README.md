@@ -181,6 +181,7 @@ de instrucciones para la creación de imágenes personalizadas con diferentes ti
 Comando | Descripción
 ------------ | -------------
 docker commit container image-name | Crea una imagen a partir de un contenedor
+docker build -t helloapp:v1 . | Crea una imagen a partir de Dockerfile
 
 ## Creación de imágenes con DockerFile
 
